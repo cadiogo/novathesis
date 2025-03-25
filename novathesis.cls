@@ -234,9 +234,9 @@
                                    }},
   % LANGUAGES
   lang/extra/.new list           = {},
-  lang/main/.new choice         = {en, pt, fr, it, de, es, gr},
-  lang/cover/.new choice        = {en, pt, fr, it, de, es, gr},
-  lang/copyright/.new choice    = {en, pt, fr, it, de, es, gr},
+  lang/main/.new choice         = {en, pt, fr, it, de, es, gr, uk},
+  lang/cover/.new choice        = {en, pt, fr, it, de, es, gr, uk},
+  lang/copyright/.new choice    = {en, pt, fr, it, de, es, gr, uk},
   lang/.new cmd                 = {\optionsalso{/novathesis/lang/main=#1,
                                                 /novathesis/lang/cover=#1,
                                                 /novathesis/lang/copyright=#1}},
@@ -378,11 +378,11 @@
 
 
 \options{/@nt/.new family,
-  lang/short/.new list={en, pt, fr, it, de, es, gr},
+  lang/short/.new list={en, pt, fr, it, de, es, gr, uk},
   % lang/current/.new choice={en, pt, fr, it, de, es, gr},
   lang/loaded/.new list={},
   % lang/shorttolong/.new choice={en=english, pt=portuguese, fr=french, it=italian, de=german, es=spanish, gr=greek},
-  fontenc/.new choice={en=T1, pt=T1, fr=T1, it=T1, de=T1, es=T1, gr=LGR},
+  fontenc/.new choice={en=T1, pt=T1, fr=T1, it=T1, de=T1, es=T1, gr=LGR, uk=T2A},
 }
 
 \newdata{langlong}
@@ -393,6 +393,7 @@
 \langlong(de):={german}
 \langlong(es):={spanish}
 \langlong(gr):={greek}
+\langlong(uk):={ukrainian}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% MANAGE FOLDERS PER CLASS
@@ -877,9 +878,12 @@
 
 %--------------------------------
 % “glossasries” stuff - after hyperref
-\ifoptioncontains{/novathesis/lang/extra}{gr}{%
-  \PassOptionsToPackage{xindy={language=\@LANG@MAIN@LONG}}{glossaries-extra}
-}{}
+% \ifoptioncontains{/novathesis/lang/extra}{gr}{%
+%   \PassOptionsToPackage{xindy={language=\@LANG@MAIN@LONG}}{glossaries-extra}
+% }{}
+% \ifoptioncontains{/novathesis/lang/extra}{uk}{%
+%   \PassOptionsToPackage{xindy={language=\@LANG@MAIN@LONG}}{glossaries-extra}
+% }{}
 
 \RequirePackage[%
   % , nonumberlist
@@ -2432,14 +2436,14 @@
 }
 
 \newcommand{\@ntprintabstract}[1]{%
-  % \typeout{NT PRINT ABSTRACT=[#1]}\NTPRINTABSTRACT@I%
+  \typeout{NT PRINT ABSTRACT=[#1]}\NTPRINTABSTRACT@I%
   \iffileadded[#1]{abstract}{%
-    % \typeout{NT PRINT ABSTRACT 2=[#1]}\NTPRINTABSTRACT@II
+    \typeout{NT PRINT ABSTRACT 2=[#1]}\NTPRINTABSTRACT@II
     \begingroup
-      % \typeout{NT PRINT ABSTRACT #1}\bbbb
+      \typeout{NT PRINT ABSTRACT #1}\bbbb
       \StrCut{#1}{-}\@ABS@LANG\@dummy%
       \ntselectlang{\@ABS@LANG}%
-      % \typeout{NTL=\languagename [#1]}\bbbb
+      \typeout{NTL=\languagename [#1]}\bbbb
       \pdfbookmark[1]{\thebkmstring(abstract,#1)}{bmabstract#1}%
       \NTRunHook{abstract/pre}%
       \NTRunHook{abstract/#1/pre}%
